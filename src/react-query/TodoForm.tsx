@@ -1,39 +1,9 @@
 import { useRef } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Todo } from './hooks/useTodos';
-import axios from 'axios';
-
-interface AddTodoContext {
-  previousTodos: Todo[]
-}
+import useAddToDo from './hooks/useAddToDo';
 
 const TodoForm = () => {
-  const queryClient = useQueryClient()
-  const addTodo = useMutation<Todo, Error, Todo, AddTodoContext>({
-    mutationFn: (todo: Todo) =>
-      axios
-        .post<Todo>('https://jsonplaceholder.typicode.com/todos9', todo)
-        .then(res => res.data),
-
-    onMutate: (newTodo: Todo) => {
-      const previousTodos = queryClient.getQueryData<Todo[]>(['todos']) || [];
-
-      queryClient.setQueryData<Todo[]>(['todos'], (todos) => {
-        return [newTodo, ...(todos || [])]
-      })
-      if (ref.current) ref.current.value = '';
-
-      return { previousTodos }
-    },
-    onSuccess: (saveTodo, newTodo) => {
-      queryClient.setQueryData<Todo[]>(['todos'], (todos) =>
-        todos?.map((todo) => todo.id === newTodo.id ? saveTodo : todo))
-    },
-    onError: (error, newTodo: Todo, context) => {
-      if (!context) return;
-
-      queryClient.setQueryData<Todo[]>(['todos'], context.previousTodos);
-    }
+  const addTodo = useAddToDo(() => {
+    if (ref.current) ref.current.value = '';
   })
   const ref = useRef<HTMLInputElement>(null);
 
