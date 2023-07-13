@@ -16,7 +16,7 @@ const useTodos = () => {
 
   return useQuery<Todo[], Error>({
     queryKey: CACHE_KEY_TODOS, // for caching
-    queryFn: () => apiClient.getAll(),
+    queryFn: apiClient.getAll,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }

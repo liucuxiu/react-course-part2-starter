@@ -28,7 +28,7 @@ const TodoForm = () => {
         </div>
         <div className="col">
           <button className="btn btn-primary">
-            {addTodo.isLoading ? 'Saving...' : 'Add Todo'}
+            Add
           </button>
         </div>
       </form>
