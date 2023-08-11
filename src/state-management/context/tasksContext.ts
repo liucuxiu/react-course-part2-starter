@@ -3,7 +3,7 @@ import React, { Dispatch } from 'react';
 
 interface TasksContextType {
   tasks: Task[];
-  dispatch: Dispatch<TaskAction>;
+  taskDispatch: Dispatch<TaskAction>;
 }
 
 const TasksContext = React.createContext<TasksContextType>({} as TasksContextType);
