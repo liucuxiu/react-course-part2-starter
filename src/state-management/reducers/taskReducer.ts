@@ -1,4 +1,4 @@
-interface Task {
+export interface Task {
   id: number;
   title: string;
 }
@@ -13,9 +13,9 @@ interface RemoveTask {
   taskId: number;
 }
 
-type Action = AddTask | RemoveTask;
+export type TaskAction = AddTask | RemoveTask;
 
-const taskReducer = (state: Task[], action: Action): Task[] => {
+const taskReducer = (state: Task[], action: TaskAction): Task[] => {
   switch (action.type) {
     case 'ADD_TASK':
       return [action.task, ...state];

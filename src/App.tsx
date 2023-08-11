@@ -1,19 +1,17 @@
 import './App.css';
-import TodoForm from './react-query/TodoForm';
-import TodoList from './react-query/TodoList';
-import Counter from './state-management/Counter';
-import TaskList from './state-management/TaskList';
-import LoginStatus from './state-management/LoginStatus';
+import { useReducer } from 'react';
+import taskReducer from './state-management/reducers/taskReducer';
+import NavBar from './state-management/NavBar';
+import HomePage from './state-management/HomePage';
+import TasksContext from './state-management/context/tasksContext';
 
 function App() {
+  const [tasks, dispatch] = useReducer(taskReducer, [])
   return (
-    <>
-      <LoginStatus/>
-      <TaskList/>
-      <Counter/>
-      <TodoForm/>
-      <TodoList/>
-    </>
+    <TasksContext.Provider value={{ tasks, dispatch }}>
+      <NavBar/>
+      <HomePage/>
+    </TasksContext.Provider>
 
   )
 }
