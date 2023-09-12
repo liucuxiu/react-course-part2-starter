@@ -1,4 +1,4 @@
-import useAuth from './hooks/useAuth';
+import useAuth from './useAuth';
 
 const LoginStatus = () => {
   const { user, authDispatch } = useAuth();
@@ -9,7 +9,7 @@ const LoginStatus = () => {
           <span className="mx-2">{user}</span>
           <a onClick={() => authDispatch({
             type: 'LOGOUT'
-          })} href="#">
+          })} href="src/state-management/auth/LoginStatus#">
             Logout
           </a>
         </div>
@@ -20,7 +20,7 @@ const LoginStatus = () => {
       <a onClick={() => authDispatch({
         type: 'LOGIN',
         username: 'mosh.hamedani'
-      })} href="#">
+      })} href="src/state-management/auth/LoginStatus#">
         Login
       </a>
     </div>
